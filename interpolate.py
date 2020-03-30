@@ -52,7 +52,7 @@ def interpolate_list(x,y,x0):
     plt.show()
     return x0,y0
 
-def lagrange_interpolate(x,y,x0):
+def lagrangeInterpolate(x,y,x0):
     """
     Uses the method of Lagrange Interpolation. Takes in 3 inputs. 
     x: input as a list
@@ -71,3 +71,25 @@ def lagrange_interpolate(x,y,x0):
         ya.append(y[j] * L)
     y0 = sum(ya)
     return x0,y0
+
+def lagrangeInterpolateList(x,y,x0):
+    """
+    Uses the method of Lagrange Interpolation. Takes in 3 inputs.
+    x: input as a list
+    y: input as a list
+    x0: points to be interpolated as a lists
+
+    """
+    k = len(x)
+    y0 = []
+    for i in range(len(x0)):
+        ya = []
+        for j in range(k):
+            L = 1
+            for m in range(k):
+                if j != m:
+                    L = L * ((x0[i] - x[m])/(x[j] - x[m]))
+            ya.append(y[j] * L)
+        y0.append(sum(ya))
+    return x0,y0
+
