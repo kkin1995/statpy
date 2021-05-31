@@ -1,4 +1,4 @@
-from central_tendancy import mean
+from central_tendancy import mean, median
 
 def range_of_array(*arr):
     if type(arr[0]) == list or type(arr[0]) == tuple:
@@ -40,7 +40,7 @@ def mean_absolute_deviation(*arr):
     mean_arr = mean(arr)
     sum_of_diffs = 0
     for i in range(length):
-        sum_of_diffs += arr[i] - mean_arr
+        sum_of_diffs += abs(arr[i] - mean_arr)
     return sum_of_diffs / length
 
 def variance(*arr):
@@ -62,8 +62,24 @@ def standard_deviation(*arr):
     from math import sqrt
     return sqrt(var)
 
+def median_absolute_deviation(*arr):
+    if type(arr[0]) == list or type(arr[0]) == tuple:
+        arr = arr[0]
+    
+    median_arr = median(arr)
+    absolute_deviations = []
+    length = len(arr)
+    for i in range(length):
+        absolute_deviations.append(abs(arr[i] - median_arr))
+
+    median_abs_deviation = median(absolute_deviations)
+    return median_abs_deviation
+
+
 if __name__ == "__main__":
     arr = [11,10,11,11,11,14,8,9,8]
-    print(inter_quartile_range(arr))
-    print(variance(arr))
-    print(standard_deviation(arr))
+    print("IQR = ", inter_quartile_range(arr))
+    print("Variance = ", variance(arr))
+    print("Standard Deviation = ", standard_deviation(arr))
+    print("Median Absolute Deviation = ", median_absolute_deviation(arr))
+    print("Mean Absolute Deviation = ", mean_absolute_deviation(arr))
